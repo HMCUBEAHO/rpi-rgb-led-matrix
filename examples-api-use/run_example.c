@@ -3,7 +3,7 @@
 
 void runExample(int userInput) {
     // Der Grundbefehl, der nicht verändert wird
-    const char *baseCommand = "sudo ./demo --led-rows=64 --led-cols=64 --led-chain=6 --led-pixel-mapper \"U-mapper\\;Rotate:0\" --led-gpio-mapping=adafruit-hat --led-brightness=40 -D ";
+    const char *baseCommand = "sudo ./demo --led-rows=64 --led-cols=64 --led-pixel-mapper \"U-mapper\\;Rotate:0\" --led-gpio-mapping=adafruit-hat --led-brightness=40 -D ";
     
     // Erstelle ein Puffer für den vollständigen Befehl
     char command[256];
