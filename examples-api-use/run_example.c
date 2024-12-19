@@ -1,24 +1,25 @@
-#include <string>
+#include <stdio.h>
+#include <stdlib.h>
 
-using namespace std;
-
-// Funktion zum Ausführen des gewählten Beispiels mit der Benutzereingabe als Parameter
 void runExample(int userInput) {
     // Der Grundbefehl, der nicht verändert wird
-    string baseCommand = "sudo ./demo --led-rows=64 --led-cols=64 --led-pixel-mapper \"U-mapper;Rotate:0\" --led-gpio-mapping=adafruit-hat --led-brightness=40 -D ";
-
-    // Der gesamte Befehl wird durch Anhängen der Benutzereingabe gebildet
-    string command = baseCommand + to_string(userInput);
-
+    const char *baseCommand = "sudo ./demo --led-rows=64 --led-cols=64 --led-pixel-mapper \"U-mapper;Rotate:0\" --led-gpio-mapping=adafruit-hat --led-brightness=40 -D ";
+    
+    // Erstelle ein Puffer für den vollständigen Befehl
+    char command[256];
+    
+    // Erstelle den vollständigen Befehl durch Anhängen der Benutzereingabe
+    snprintf(command, sizeof(command), "%s%d", baseCommand, userInput);
+    
     // Ausgabe des finalen Befehls
-    cout << "Führe folgenden Befehl aus: " << command << endl;
+    printf("Führe folgenden Befehl aus: %s\n", command);
 
     // Führe den Befehl aus
-    int result = system(command.c_str());
+    int result = system(command);
 
     // Überprüfen, ob der Befehl erfolgreich war
     if (result != 0) {
-        cout << "Fehler beim Ausführen des Befehls!" << endl;
+        printf("Fehler beim Ausführen des Befehls!\n");
     }
 }
 
@@ -26,8 +27,8 @@ int main() {
     int userChoice;
 
     // Fordere den Benutzer zur Eingabe einer Zahl auf
-    cout << "Bitte geben Sie eine Zahl ein (z. B. 10): ";
-    cin >> userChoice;
+    printf("Bitte geben Sie eine Zahl ein (z. B. 10): ");
+    scanf("%d", &userChoice);
 
     // Führe das Beispiel aus
     runExample(userChoice);
